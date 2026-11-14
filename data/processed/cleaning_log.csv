@@ -1,0 +1,9 @@
+Decision,Rows affected,Revenue impact (GBP),Business reason
+Remove exact duplicate lines,5268,21740.98,"Same invoice, product, qty, price, time -> scanner/export duplication, would double-count revenue."
+"Flag: bad-debt adjustments (A*, negative price)",3,-11062.06,"Accounting entries, not customer purchases -> excluded from behaviour analysis."
+Flag: zero-price lines,2510,0.0,"Giveaways / write-offs / system errors -> no revenue, must not count as a purchase."
+Flag: negative qty without 'C' prefix,1336,0.0,"Damages, lost stock, manual corrections (mostly guests, price 0)."
+"Flag: non-product codes (postage, fees, manual)",2910,-45997.016000000025,"Real money, but not product demand -> kept in revenue, removed from product rankings."
+Flag: cancellations (C*),9251,-893979.73,Returns. KEPT and netted against revenue instead of being dropped.
+Flag: guest checkout (no CustomerID),135037,1447487.5300000003,"Entire invoices are anonymous -> real sales, but cannot enter customer-level RFM."
+"Genuine product sale lines (Qty>0, price>0, product code)",522568,10247905.129999999,Base for product & basket analytics.
